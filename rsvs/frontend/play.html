@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>运动遥控 — 机器人技能可视化演示交互系统</title>
+  <link rel="stylesheet" href="/css/app.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="/">
+        <span class="brand-name">机器人技能可视化演示交互系统</span>
+        <span class="brand-ver">软件版本 V1.0</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="/" data-nav="home">首页</a></li>
+          <li><a href="/skills.html" data-nav="skills">技能库</a></li>
+          <li><a href="/nav.html" data-nav="nav">导航演示</a></li>
+          <li><a href="/play.html" data-nav="play">运动遥控</a></li>
+          <li><a href="/help.html" data-nav="help">帮助说明</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>运动遥控演示</h1>
+      <p>本页用 WASD 遥控机器狗；相机改到 IJKL。底坞可切换步态、幅度、周期与高度档位。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cta-row" style="margin-bottom:1.25rem">
+        <button type="button" class="btn btn-primary" data-launch-demo="play">启动并打开</button>
+        <button type="button" class="btn btn-danger" data-stop-demo="play" disabled>停止演示</button>
+        <span class="badge" data-status="play">检测中</span>
+      </div>
+
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="n">移动</div>
+          <h3>W A S D</h3>
+          <p>按住给出固定前后/侧向速度，松手停止；幅度档可整体缩放。</p>
+        </div>
+        <div class="flow-step">
+          <div class="n">转向</div>
+          <h3>Q / E</h3>
+          <p>按住给出固定偏航角速度，松手停止。</p>
+        </div>
+        <div class="flow-step">
+          <div class="n">步态 / 档位</div>
+          <h3>1–4 · 5–7 · ZXC · VNM</h3>
+          <p>步态、幅度上限、周期与机身高度档位快捷切换。</p>
+        </div>
+        <div class="flow-step">
+          <div class="n">相机</div>
+          <h3>I J K L</h3>
+          <p>本页相机平移改到 IJKL；U/O 升降；方向键旋转。仅本页有效。</p>
+        </div>
+      </div>
+
+      <table class="keys-table">
+        <thead>
+          <tr><th>快捷键</th><th>功能</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>W</code> / <code>S</code></td><td>纵向速度 ±（机器狗）</td></tr>
+          <tr><td><code>A</code> / <code>D</code></td><td>侧向速度 ±（机器狗）</td></tr>
+          <tr><td><code>Q</code> / <code>E</code></td><td>偏航角速度 ±</td></tr>
+          <tr><td><code>B</code> / <code>Space</code></td><td>速度归零急停</td></tr>
+          <tr><td><code>1</code>–<code>4</code></td><td>切换步态类型（单选高亮）</td></tr>
+          <tr><td><code>5</code> / <code>6</code> / <code>7</code></td><td>指令幅度 ×0.3 / ×0.7 / ×1.0</td></tr>
+          <tr><td><code>Z</code> / <code>X</code> / <code>C</code></td><td>步态周期 慢 / 中 / 快</td></tr>
+          <tr><td><code>V</code> / <code>N</code> / <code>M</code></td><td>机身高度 低 / 中 / 高</td></tr>
+          <tr><td><code>R</code> / <code>F</code></td><td>复位站立 / 前进反向</td></tr>
+          <tr><td>底坞「自由相机」</td><td>解锁后 <code>IJKL</code>/<code>UO</code>/方向键控制视角</td></tr>
+          <tr><td>底坞「锁定相机」</td><td>跟随机器人</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">机器人技能可视化演示交互系统 V1.0 · 运动遥控</div>
+  </footer>
+  <script src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>机器人技能可视化演示交互系统 V1.0</title>
+  <link rel="stylesheet" href="/css/app.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="/">
+        <span class="brand-name">机器人技能可视化演示交互系统</span>
+        <span class="brand-ver">软件版本 V1.0</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="/" data-nav="home">首页</a></li>
+          <li><a href="/skills.html" data-nav="skills">技能库</a></li>
+          <li><a href="/nav.html" data-nav="nav">导航演示</a></li>
+          <li><a href="/play.html" data-nav="play">运动遥控</a></li>
+          <li><a href="/help.html" data-nav="help">帮助说明</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap hero-solo">
+      <span class="hero-kicker">四足机器人 · 可视化交互</span>
+      <h1 class="hero-brand">机器人技能可视化<br />演示交互系统</h1>
+      <p class="hero-lead">
+        在浏览器中触发高动态技能、设置导航终点并遥控运动参数，实时观察三维仿真执行过程。
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/skills.html">进入技能库</a>
+        <a class="btn btn-ghost" href="/help.html">操作说明</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>演示模块</h2>
+        <p>三大交互模块覆盖技能展示、避障导航与人在环运动遥控。</p>
+      </div>
+      <div class="module-list">
+        <article class="module-row">
+          <div class="module-kicker">模块 01</div>
+          <div>
+            <h3>技能可视化演示</h3>
+            <p>按钮与数字键触发前脚直立、后空翻、弹跳等高动态技能，支持急停与复位。</p>
+          </div>
+          <div class="module-actions">
+            <button type="button" class="btn btn-primary" data-launch-demo="skills">启动并打开</button>
+            <button type="button" class="btn btn-danger" data-stop-demo="skills" disabled>停止演示</button>
+            <span class="badge" data-status="skills">检测中</span>
+          </div>
+        </article>
+        <article class="module-row">
+          <div class="module-kicker">模块 02</div>
+          <div>
+            <h3>导航可视化交互</h3>
+            <p>点击地面设终点，Lidar 建图与路径规划，空格开始/停止，可开关点云与栅格显示。</p>
+          </div>
+          <div class="module-actions">
+            <button type="button" class="btn btn-primary" data-launch-demo="nav">启动并打开</button>
+            <button type="button" class="btn btn-danger" data-stop-demo="nav" disabled>停止演示</button>
+            <span class="badge" data-status="nav">检测中</span>
+          </div>
+        </article>
+        <article class="module-row">
+          <div class="module-kicker">模块 03</div>
+          <div>
+            <h3>运动遥控演示</h3>
+            <p>按住 WASD/QE 以默认固定速度覆盖指令（松手停止）；步态与档位单选高亮；本页相机为 IJKL，支持锁定/自由。</p>
+          </div>
+          <div class="module-actions">
+            <button type="button" class="btn btn-primary" data-launch-demo="play">启动并打开</button>
+            <button type="button" class="btn btn-danger" data-stop-demo="play" disabled>停止演示</button>
+            <span class="badge" data-status="play">检测中</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="status-panel">
+        <h2>演示服务状态</h2>
+        <ul class="status-list">
+          <li>
+            <span><span class="dot"></span>技能演示 :8081</span>
+            <span class="badge" data-status="skills">检测中</span>
+          </li>
+          <li>
+            <span><span class="dot"></span>导航演示 :8082</span>
+            <span class="badge" data-status="nav">检测中</span>
+          </li>
+          <li>
+            <span><span class="dot"></span>运动遥控 :8083</span>
+            <span class="badge" data-status="play">检测中</span>
+          </li>
+        </ul>
+        <p class="notice">
+          点击「启动并打开」由本门户拉起演示（需在已安装仿真依赖的环境中运行门户）。
+          关闭三维网页约数秒后进程自动结束；亦可使用「停止演示」。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">机器人技能可视化演示交互系统 V1.0 · 产品门户</div>
+  </footer>
+  <script src="/js/app.js"></script>
+</body>
+</html>

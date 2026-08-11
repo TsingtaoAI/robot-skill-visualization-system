@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>帮助说明 — 机器人技能可视化演示交互系统</title>
+  <link rel="stylesheet" href="/css/app.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="/">
+        <span class="brand-name">机器人技能可视化演示交互系统</span>
+        <span class="brand-ver">软件版本 V1.0</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="/" data-nav="home">首页</a></li>
+          <li><a href="/skills.html" data-nav="skills">技能库</a></li>
+          <li><a href="/nav.html" data-nav="nav">导航演示</a></li>
+          <li><a href="/play.html" data-nav="play">运动遥控</a></li>
+          <li><a href="/help.html" data-nav="help">帮助说明</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>帮助说明</h1>
+      <p>软件信息、运行环境、模块端口与完整快捷键总表。可与 softcopyright/软件说明书 对照。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap prose">
+      <h2>软件信息</h2>
+      <p>软件全称：机器人技能可视化演示交互系统 · 版本 V1.0。本系统提供统一 Web 门户与三维可视化交互控制，调用仿真与策略模块完成技能/导航/遥控演示。</p>
+
+      <h2>运行环境</h2>
+      <ul>
+        <li>操作系统：Linux（推荐 Ubuntu）；浏览器 Chrome / Edge / Firefox</li>
+        <li>Python：conda 环境 <code>lr_gen</code>（Python 3.10）；依赖与 LeggedGym-Ex · Genesis 一致</li>
+        <li>硬件：建议 NVIDIA GPU；无 GPU 时启动命令追加 <code>--cpu</code></li>
+      </ul>
+      <pre class="cmd">conda create -n lr_gen python=3.10 -y
+conda activate lr_gen
+pip install torch==2.8.0 torchvision==0.23.0 --index-url https://download.pytorch.org/whl/cu126
+cd newtest
+pip install -e ".[genesis]"</pre>
+      <p>说明：勿再单独 pip 安装零散的 genesis-world / rsl-rl 清单；由上述 editable 安装拉取正确版本。<code>SIMULATOR=genesis</code> 已由 run.sh 默认设置。</p>
+
+      <h2>启动命令</h2>
+      <pre class="cmd">conda activate lr_gen
+./newtest/run.sh hub --port 8090
+./newtest/run.sh skills --port 8081
+./newtest/run.sh nav --port 8082
+./newtest/run.sh play --port 8083</pre>
+
+      <h2>模块端口</h2>
+      <table class="keys-table">
+        <thead><tr><th>模块</th><th>端口</th></tr></thead>
+        <tbody>
+          <tr><td>系统门户</td><td>8090</td></tr>
+          <tr><td>技能演示</td><td>8081</td></tr>
+          <tr><td>导航演示</td><td>8082</td></tr>
+          <tr><td>运动遥控</td><td>8083</td></tr>
+        </tbody>
+      </table>
+
+      <h2>快捷键总表</h2>
+      <table class="keys-table">
+        <thead><tr><th>模块</th><th>按键</th><th>功能</th></tr></thead>
+        <tbody>
+          <tr><td>技能</td><td><code>1</code>–<code>5</code> <code>R</code> <code>Esc</code> <code>F</code></td><td>触发 / 复位 / 急停 / 重放</td></tr>
+          <tr><td>导航</td><td><code>Space</code> <code>C</code> <code>R</code> <code>T</code><code>Y</code> <code>V</code></td><td>开停 / 清终点 / 重置 / 调速 / Lidar</td></tr>
+          <tr><td>遥控</td><td><code>WASD</code> <code>QE</code>（按住） <code>B</code> <code>1</code>–<code>7</code></td><td>固定速覆盖 / 偏航 / 急停 / 步态与幅度</td></tr>
+          <tr><td>遥控相机</td><td>锁定/自由 · <code>IJKL</code> / <code>UO</code> / 方向键</td><td>本页相机（技能/导航仍用 WASD）</td></tr>
+          <tr><td>技能/导航相机</td><td><code>WASD</code> / 方向键 / 鼠标</td><td>平移 · 环视（业务键不占用）</td></tr>
+        </tbody>
+      </table>
+
+      <h2>常见问题</h2>
+      <ul>
+        <li>门户显示「未启动」：先启动对应 run.sh，或点「启动并打开」等待就绪。</li>
+        <li>三维页无法连接：检查端口占用与防火墙；远程访问时门户会用当前主机名打开演示。</li>
+        <li>技能按钮无响应：等待当前技能完成，或按 Esc / 点复位。</li>
+        <li>结束演示：关闭三维网页，或点门户「停止演示」；门户终端 Ctrl+C 结束门户。</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">机器人技能可视化演示交互系统 V1.0 · 帮助说明</div>
+  </footer>
+  <script src="/js/app.js"></script>
+</body>
+</html>

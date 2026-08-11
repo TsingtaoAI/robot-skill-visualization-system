@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>导航演示 — 机器人技能可视化演示交互系统</title>
+  <link rel="stylesheet" href="/css/app.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="/">
+        <span class="brand-name">机器人技能可视化演示交互系统</span>
+        <span class="brand-ver">软件版本 V1.0</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="/" data-nav="home">首页</a></li>
+          <li><a href="/skills.html" data-nav="skills">技能库</a></li>
+          <li><a href="/nav.html" data-nav="nav">导航演示</a></li>
+          <li><a href="/play.html" data-nav="play">运动遥控</a></li>
+          <li><a href="/help.html" data-nav="help">帮助说明</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>导航可视化交互</h1>
+      <p>在障碍场景中点选终点，观察 Lidar 建图、路径规划与自主避障行走过程。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cta-row" style="margin-bottom:1.25rem">
+        <button type="button" class="btn btn-primary" data-launch-demo="nav">启动并打开</button>
+        <button type="button" class="btn btn-danger" data-stop-demo="nav" disabled>停止演示</button>
+        <span class="badge" data-status="nav">检测中</span>
+      </div>
+
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="n">STEP 01</div>
+          <h3>选择场景</h3>
+          <p>通道 / 围栏 / 开阔地，加载后重建环境。</p>
+        </div>
+        <div class="flow-step">
+          <div class="n">STEP 02</div>
+          <h3>点击地面</h3>
+          <p>鼠标点地预览终点，区外自动投影到边界内。</p>
+        </div>
+        <div class="flow-step">
+          <div class="n">STEP 03</div>
+          <h3>开始导航</h3>
+          <p>空格或按钮启动；调节速度，观察路径与点云。</p>
+        </div>
+        <div class="flow-step">
+          <div class="n">STEP 04</div>
+          <h3>到达 / 重置</h3>
+          <p>到达后可设新终点；R 键复位建图与位姿。</p>
+        </div>
+      </div>
+
+      <table class="keys-table">
+        <thead>
+          <tr><th>快捷键</th><th>功能</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>Space</code></td><td>开始 / 停止导航</td></tr>
+          <tr><td><code>C</code></td><td>清除终点</td></tr>
+          <tr><td><code>R</code></td><td>重置位姿与建图</td></tr>
+          <tr><td><code>T</code> / <code>Y</code></td><td>降低 / 提高导航速度</td></tr>
+          <tr><td><code>V</code></td><td>开关 Lidar 点云</td></tr>
+          <tr><td><code>1</code>–<code>4</code></td><td>通道场景预设终点</td></tr>
+          <tr><td>鼠标左键</td><td>点击地面设置终点</td></tr>
+          <tr><td><code>WASD</code> / 方向键</td><td>相机平移与视角（保留系统默认）</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">机器人技能可视化演示交互系统 V1.0 · 导航演示</div>
+  </footer>
+  <script src="/js/app.js"></script>
+</body>
+</html>

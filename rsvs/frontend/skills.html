@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>技能库 — 机器人技能可视化演示交互系统</title>
+  <link rel="stylesheet" href="/css/app.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="/">
+        <span class="brand-name">机器人技能可视化演示交互系统</span>
+        <span class="brand-ver">软件版本 V1.0</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="/" data-nav="home">首页</a></li>
+          <li><a href="/skills.html" data-nav="skills">技能库</a></li>
+          <li><a href="/nav.html" data-nav="nav">导航演示</a></li>
+          <li><a href="/play.html" data-nav="play">运动遥控</a></li>
+          <li><a href="/help.html" data-nav="help">帮助说明</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>技能库</h1>
+      <p>浏览高动态技能说明与快捷键，进入三维页后用按钮或数字键触发，观察执行阶段与进度。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cta-row" style="margin-bottom:1.25rem">
+        <button type="button" class="btn btn-primary" data-launch-demo="skills">启动并打开</button>
+        <button type="button" class="btn btn-danger" data-stop-demo="skills" disabled>停止演示</button>
+        <span class="badge" data-status="skills">检测中</span>
+      </div>
+
+      <table class="keys-table">
+        <thead>
+          <tr><th>快捷键</th><th>功能</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>1</code>–<code>5</code></td><td>触发对应技能</td></tr>
+          <tr><td><code>R</code></td><td>复位到四足站立</td></tr>
+          <tr><td><code>Esc</code></td><td>急停 / 取消待执行请求</td></tr>
+          <tr><td><code>F</code></td><td>重放上一技能</td></tr>
+          <tr><td><code>WASD</code> / 方向键</td><td>相机平移与视角（保留系统默认）</td></tr>
+        </tbody>
+      </table>
+
+      <div class="skill-grid">
+        <article class="skill-card">
+          <div class="idx">SKILL 01</div>
+          <div class="skill-visual">
+            <img src="/gif/前足倒立.gif" alt="前脚直立" loading="lazy" />
+          </div>
+          <h3>前脚直立</h3>
+          <p>前腿支撑倒立，展示平衡与高动态支撑。</p>
+          <div class="skill-keys">快捷键 1</div>
+        </article>
+        <article class="skill-card">
+          <div class="idx">SKILL 02</div>
+          <div class="skill-visual">
+            <img src="/gif/后足直立.gif" alt="后腿站立" loading="lazy" />
+          </div>
+          <h3>后腿站立循环</h3>
+          <p>后腿直立升起 → 保持 → 回落。</p>
+          <div class="skill-keys">快捷键 2</div>
+        </article>
+        <article class="skill-card">
+          <div class="idx">SKILL 03</div>
+          <div class="skill-visual">
+            <img src="/gif/后空翻.gif" alt="后空翻" loading="lazy" />
+          </div>
+          <h3>后空翻</h3>
+          <p>单次后空翻。</p>
+          <div class="skill-keys">快捷键 3</div>
+        </article>
+        <article class="skill-card">
+          <div class="idx">SKILL 04</div>
+          <div class="skill-visual">
+            <img src="/gif/弹跳.gif" alt="弹跳" loading="lazy" />
+          </div>
+          <h3>弹跳</h3>
+          <p>向前弹跳一次。</p>
+          <div class="skill-keys">快捷键 4</div>
+        </article>
+        <article class="skill-card">
+          <div class="idx">SKILL 05</div>
+          <div class="skill-visual">
+            <img src="/gif/连续后空翻.gif" alt="连续后空翻" loading="lazy" />
+          </div>
+          <h3>连续后空翻</h3>
+          <p>双次后空翻收尾动作。</p>
+          <div class="skill-keys">快捷键 5</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">机器人技能可视化演示交互系统 V1.0 · 技能库</div>
+  </footer>
+  <script src="/js/app.js"></script>
+</body>
+</html>

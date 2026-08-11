@@ -1,0 +1,48 @@
+[project]
+name = "newtest-runtime"
+version = "1.0.0"
+description = "Runtime deps for R.S.V.I.S. (newtest), aligned with LeggedGym-Ex Genesis"
+requires-python = ">=3.8"
+dependencies = [
+                'matplotlib',
+                'tensorboard',
+                'xlsxwriter',
+                'pandas',
+                'wandb',
+                'tqdm',
+                'scipy',
+                'torch',
+                'torchvision',
+                'numpy',
+                'pygame',
+                'trimesh',
+                'rich-argparse',
+                'viser'
+]
+
+[project.optional-dependencies]
+isaacgym = [
+    "torch==2.4.1+cu121",
+    'torchvision==0.19.1+cu121',
+    "numpy==1.24.1",
+    "pandas==2.0.3",
+    "scipy==1.10.1",
+    "matplotlib==3.7.5",
+    "fsspec<=2025.3.0",
+    "isaacgym==1.0rc4",
+    "onnx>=1.17.0",
+    "protobuf==4.25.0",
+    "warp-lang==1.10.1",
+]
+genesis = [
+    "torch==2.8.0+cu126",
+    "torchvision==0.23.0+cu126",
+    "genesis-world==1.0.0",
+    'warp-lang'
+]
+isaaclab = [
+    "warp-lang==1.12.0",
+]
+
+[tool.setuptools]
+packages = ['rsl_rl', 'resources', 'legged_gym']
