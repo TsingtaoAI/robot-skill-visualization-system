@@ -1,5 +1,6 @@
 # robot-skill-visualization-system
 基于 Genesis 和强化学习的 Unitree Go2 仿真演示系统，支持高动态技能、LiDAR 建图、A* 导航、网页三维可视化与实时运动遥控。
+<<<<<<< HEAD
 # Go2 Robot Skill Visualization System
 
 基于 Genesis、PyTorch 和 Viser 构建的 Unitree Go2 机器人技能可视化与交互演示系统。
@@ -83,3 +84,5 @@ LiDAR + Occupancy + A*    强化学习策略
           12关节控制指令
                   │
           Genesis 物理仿真
+=======
+>>>>>>> origin/main
