@@ -1,295 +1,281 @@
-# 机器人技能可视化演示交互系统
+# Robot Skill Visualization and Interactive Demonstration System
 
-本项目是一套面向 **Unitree Go2 四足机器人**的仿真演示与交互系统，基于 Genesis、PyTorch、Viser、Legged Gym 和 RSL-RL 构建。
+This project is a simulation-based demonstration and interaction system designed for the **Unitree Go2 quadruped robot**. It is built with Genesis, PyTorch, Viser, Legged Gym, and RSL-RL.
 
-系统加载已经训练完成的强化学习策略，在 Genesis 物理仿真环境中实现机器人高动态技能、自主导航和基础运动控制，并对机器人姿态、运动状态、传感器数据及路径规划结果进行三维可视化。
-
-<p align="center">
-  <img src="rsvs/gif/gif图/原未拆解gif图/主页.gif" width="850" alt="机器人技能可视化系统主页">
-</p>
-
-系统将强化学习控制、物理仿真、路径规划和三维可视化组合在一起。用户可以通过统一的交互界面切换不同功能，查看技能执行过程，并观察机器人的实时运动状态。
-
-## 🤖 核心功能
-
-系统主要包含以下三类功能：
-
-- 高动态技能演示；
-- 自主导航与路径规划；
-- 基础运动与步态控制。
-
-不同功能模块相互独立，可以分别运行和继续扩展。
-
-## 🤸 高动态技能演示
-
-系统内置多个针对特定动作训练的强化学习策略，可以控制 Go2 完成：
-
-- 前足倒立；
-- 后足直立；
-- 单次后空翻；
-- 连续后空翻；
-- 向前弹跳。
-
-这些动作并不是预先录制好的固定动画。技能执行过程中，系统会持续读取机器人的机身姿态、角速度、关节位置和关节速度，再由强化学习策略实时计算 12 个关节的控制动作。
-
-### 前足倒立
-
-前足倒立策略控制机器人完成重心前移、后腿抬起和前腿支撑，并在姿态变化过程中维持身体平衡。
+The system loads pretrained reinforcement learning policies to perform highly dynamic skills, autonomous navigation, and basic locomotion control in the Genesis physics simulation environment. It also provides 3D visualization of the robot’s posture, motion state, sensor data, and path-planning results.
 
 <p align="center">
-  <img src="rsvs/gif/前足倒立.gif" width="620" alt="Go2 前足倒立技能">
+  <img src="rsvs/gif/gif图/原未拆解gif图/主页.gif" width="850" alt="Robot Skill Visualization System Homepage">
 </p>
 
-这类动作对机器人的动态平衡能力要求较高。策略需要根据机身倾角、角速度和关节状态持续修正动作，避免机器人向前或向两侧倾倒。
+The system combines reinforcement learning control, physics simulation, path planning, and 3D visualization. Users can switch between different functions through a unified interactive interface, observe skill execution, and monitor the robot’s motion state in real time.
 
-### 后空翻
+## 🤖 Core Features
 
-后空翻策略负责控制机器人完成蓄力、起跳、空中翻转、落地和站稳恢复等连续阶段。
+The system mainly provides three categories of functionality:
+
+- Highly dynamic skill demonstrations;
+- Autonomous navigation and path planning;
+- Basic locomotion and gait control.
+
+These modules are independent of one another and can be run or extended separately.
+
+## 🤸 Highly Dynamic Skill Demonstration
+
+The system includes multiple reinforcement learning policies trained for specific movements, enabling the Go2 robot to perform:
+
+- Front-leg handstand;
+- Rear-leg standing;
+- Single backflip;
+- Continuous backflips;
+- Forward hopping.
+
+These movements are not prerecorded animations. During skill execution, the system continuously reads the robot’s body orientation, angular velocity, joint positions, and joint velocities. The reinforcement learning policy then calculates control commands for the robot’s 12 joints in real time.
+
+### Front-Leg Handstand
+
+The front-leg handstand policy controls the robot as it shifts its center of mass forward, raises its rear legs, and supports its body using its front legs while maintaining balance throughout the movement.
 
 <p align="center">
-  <img src="rsvs/gif/后空翻.gif" width="620" alt="Go2 后空翻技能">
+  <img src="rsvs/gif/前足倒立.gif" width="620" alt="Go2 Front-Leg Handstand">
 </p>
 
-系统根据机器人高度、机身姿态、角速度和关节状态判断技能执行进度，并在动作结束后进入落地恢复阶段。
+This type of movement places high demands on the robot’s dynamic balance. The policy must continuously adjust the joint commands according to the body tilt, angular velocity, and joint state to prevent the robot from falling forward or sideways.
 
-技能模块支持：
+### Backflip
 
-- 动作交接与状态切换；
-- 起跳和落地状态判断；
-- 站稳恢复与姿态复位；
-- 技能急停；
-- 技能重放与重新执行；
-- 技能执行进度显示；
-- 仿真场景截图。
-
-### 向前弹跳
-
-弹跳策略用于展示机器人在连续运动过程中的节奏控制、身体协调和落地稳定性。
+The backflip policy controls the complete sequence of preparation, takeoff, aerial rotation, landing, and stable recovery.
 
 <p align="center">
-  <img src="rsvs/gif/弹跳.gif" width="620" alt="Go2 向前弹跳技能">
+  <img src="rsvs/gif/后空翻.gif" width="620" alt="Go2 Backflip">
 </p>
 
-与单次动作不同，连续弹跳需要策略在每次落地后快速调整机器人姿态，并为下一次起跳生成协调的关节动作。
+The system determines the current stage of the skill according to the robot’s height, body orientation, angular velocity, and joint state. After landing, the robot enters a posture recovery phase.
 
-## 🧭 自主导航
+The skill module supports:
 
-自主导航模块将环境感知、路径规划和强化学习运动控制组合为一条完整链路：
+- Skill transitions and state switching;
+- Takeoff and landing detection;
+- Stable recovery and posture reset;
+- Emergency skill interruption;
+- Skill replay and restart;
+- Skill execution progress display;
+- Simulation scene screenshots.
+
+### Forward Hopping
+
+The forward hopping policy demonstrates the robot’s rhythm control, body coordination, and landing stability during continuous movement.
+
+<p align="center">
+  <img src="rsvs/gif/弹跳.gif" width="620" alt="Go2 Forward Hopping">
+</p>
+
+Unlike a single isolated movement, continuous hopping requires the policy to quickly adjust the robot’s posture after each landing and generate coordinated joint movements for the next takeoff.
+
+## 🧭 Autonomous Navigation
+
+The autonomous navigation module combines environmental perception, path planning, and reinforcement learning-based locomotion control into a complete pipeline:
 
 ```text
-LiDAR 环境扫描
-        ↓
-占据栅格地图更新
-        ↓
-障碍物膨胀与可通行区域判断
-        ↓
-A* 全局路径规划
-        ↓
-局部目标点与速度指令生成
-        ↓
-强化学习行走策略
-        ↓
-机器人沿规划路径运动
+LiDAR Environment Scanning
+            ↓
+Occupancy Grid Map Update
+            ↓
+Obstacle Inflation and Traversability Analysis
+            ↓
+A* Global Path Planning
+            ↓
+Local Target and Velocity Command Generation
+            ↓
+Reinforcement Learning Locomotion Policy
+            ↓
+Robot Movement Along the Planned Path
 ```
 
 <p align="center">
-  <img src="rsvs/gif/gif图/导航页.gif" width="850" alt="Go2 自主导航与路径规划">
+  <img src="rsvs/gif/gif图/导航页.gif" width="850" alt="Go2 Autonomous Navigation and Path Planning">
 </p>
 
-导航模块支持：
+The navigation module supports:
 
-- 360° LiDAR 环境扫描；
-- 障碍物点云采集与显示；
-- 占据栅格地图实时更新；
-- 障碍物膨胀与安全距离设置；
-- 可通行区域判断；
-- A* 全局路径规划；
-- 环境变化后的动态重新规划；
-- 局部目标点跟踪；
-- 近距离障碍物排斥；
-- 终点约束与到达判断；
-- 路径、点云和占据地图可视化。
+- 360° LiDAR environment scanning;
+- Obstacle point-cloud collection and visualization;
+- Real-time occupancy grid map updates;
+- Obstacle inflation and safety-distance configuration;
+- Traversable-area analysis;
+- A* global path planning;
+- Dynamic replanning after environmental changes;
+- Local target tracking;
+- Short-range obstacle repulsion;
+- Goal constraints and arrival detection;
+- Visualization of paths, point clouds, and occupancy maps.
 
-系统提供通道与障碍柱、小围栏和开阔障碍场等多种导航环境。当 LiDAR 模块不可用时，系统也可以回退到静态障碍地图完成路径规划。
+The system provides several navigation environments, including corridors with obstacle columns, small fenced areas, and open obstacle fields. When LiDAR is unavailable, the system can fall back to a static obstacle map for path planning.
 
-自主导航并不是完全由强化学习实现：
+Autonomous navigation is not implemented entirely through reinforcement learning:
 
-- LiDAR 负责感知环境和障碍物；
-- 占据栅格负责保存环境信息；
-- A* 算法负责计算全局路径；
-- 局部控制模块负责生成速度指令；
-- 强化学习策略负责控制机器人稳定运动。
+- LiDAR perceives the environment and obstacles;
+- The occupancy grid stores environmental information;
+- The A* algorithm calculates the global path;
+- The local controller generates velocity commands;
+- The reinforcement learning policy controls the robot’s stable movement.
 
-## 🎮 运动控制
+## 🎮 Locomotion Control
 
-项目包含训练完成的 `go2_wtw` 行走策略，可以接收高层速度和行为指令，并将其转换为机器人关节动作。
+The project includes a pretrained `go2_wtw` locomotion policy that receives high-level velocity and behavior commands and converts them into robot joint actions.
 
 <p align="center">
-  <img src="rsvs/gif/gif图/动作控制页.gif" width="850" alt="Go2 运动控制界面">
+  <img src="rsvs/gif/gif图/动作控制页.gif" width="850" alt="Go2 Locomotion Control Interface">
 </p>
 
-运动控制模块支持：
+The locomotion control module supports:
 
-- 前进与后退；
-- 左右横移；
-- 左右偏航；
-- 停止和站立复位；
-- 速度指令幅度调节；
-- 步态周期调节；
-- 机身高度调节；
-- 相机跟随和自由视角切换；
-- 机器人运动状态实时显示。
+- Forward and backward movement;
+- Left and right lateral movement;
+- Left and right yaw rotation;
+- Stopping and standing reset;
+- Velocity command magnitude adjustment;
+- Gait cycle adjustment;
+- Body height adjustment;
+- Follow-camera and free-view modes;
+- Real-time robot motion state display.
 
-系统支持四种基础步态：
+The system supports four basic gaits:
 
-| 步态 | 策略名称 | 运动特点 |
+| Gait | Policy Name | Motion Characteristics |
 |---|---|---|
-| 对角小跑 | `trot` | 对角腿同步运动，适合常规移动 |
-| 前后跳跃 | `bound` | 前腿和后腿分组运动 |
-| 对侧跑步 | `pace` | 同侧腿成组交替运动 |
-| 四足齐跳 | `pronk` | 四条腿同步起跳和落地 |
+| Diagonal trot | `trot` | Diagonal legs move together, suitable for regular locomotion |
+| Bounding | `bound` | Front and rear legs move in separate groups |
+| Pacing | `pace` | Legs on the same side move together in alternation |
+| Pronking | `pronk` | All four legs take off and land simultaneously |
 
-高层控制模块只需要提供纵向速度、横向速度和偏航速度，强化学习策略会根据机器人当前状态自动生成协调的四足运动。
+The high-level control module only needs to provide longitudinal velocity, lateral velocity, and yaw velocity. The reinforcement learning policy automatically generates coordinated quadruped movements according to the robot’s current state.
 
-## 🧠 强化学习的作用
+## 🧠 Role of Reinforcement Learning
 
-强化学习策略是系统中的底层运动控制器，负责将高层任务指令转换为 Go2 的 12 个关节动作。
+The reinforcement learning policy acts as the system’s low-level motion controller. It converts high-level task commands into actions for the Go2 robot’s 12 joints.
 
 ```text
-速度指令或技能指令
-          ↓
-机器人当前状态与历史观测
-          ↓
-预训练强化学习策略
-          ↓
-12 个关节目标位置
-          ↓
-Genesis 物理仿真
-          ↓
-机器人产生运动
+Velocity or Skill Command
+            ↓
+Current Robot State and Observation History
+            ↓
+Pretrained Reinforcement Learning Policy
+            ↓
+Target Positions for 12 Joints
+            ↓
+Genesis Physics Simulation
+            ↓
+Robot Motion
 ```
 
-项目中的强化学习主要承担两类任务。
+Reinforcement learning is mainly responsible for two types of tasks in this project.
 
-### 通用行走控制
+### General Locomotion Control
 
-通用行走策略根据以下输入控制机器人四条腿协调运动：
+The general locomotion policy coordinates the robot’s four legs according to the following inputs:
 
-- 纵向速度；
-- 横向速度；
-- 偏航速度；
-- 步态参数；
-- 机身状态；
-- 关节位置和关节速度；
-- 历史观测信息。
+- Longitudinal velocity;
+- Lateral velocity;
+- Yaw velocity;
+- Gait parameters;
+- Body state;
+- Joint positions and velocities;
+- Historical observations.
 
-上层模块不需要直接计算每个关节应该如何运动，只需要提供目标速度和行为指令。
+The high-level module does not need to calculate how each individual joint should move. It only needs to provide the target velocity and behavior commands.
 
-### 专用技能控制
+### Specialized Skill Control
 
-高动态技能使用针对特定动作训练的独立策略，完成倒立、后足站立、后空翻和弹跳等动作。
+Highly dynamic skills use independent policies trained for specific movements, including handstands, rear-leg standing, backflips, and hopping.
 
-不同技能可以使用不同的策略权重和观测配置，从而针对动作目标进行专门控制。
+Different skills can use different policy weights and observation configurations, allowing each policy to be optimized for a specific movement objective.
 
-### 强化学习与导航的关系
+### Relationship Between Reinforcement Learning and Navigation
 
-自主导航并不直接由强化学习完成全部决策。
+Autonomous navigation does not rely on reinforcement learning for the entire decision-making process.
 
-A* 算法负责寻找从起点到终点的可行路径，导航模块根据路径生成局部速度指令，强化学习行走策略再负责控制机器人沿目标方向稳定运动。
+The A* algorithm searches for a feasible path from the starting point to the destination. The navigation module then generates local velocity commands based on the planned path, while the reinforcement learning locomotion policy controls the robot so that it moves stably in the target direction.
 
-因此，强化学习在导航系统中主要承担底层运动控制任务，而不是全局路径搜索任务。
+Therefore, reinforcement learning primarily serves as the low-level motion controller in the navigation system rather than the global path-searching method.
 
-### 预训练策略推理
+### Pretrained Policy Inference
 
-系统正常运行时直接加载已经训练完成的模型进行推理，不会在演示过程中重新训练智能体。
+During normal operation, the system directly loads trained models for inference and does not retrain the agent during demonstrations.
 
-保留 Legged Gym、RSL-RL 和相关训练结构的主要目的包括：
+The Legged Gym, RSL-RL, and related training structures are retained to:
 
-- 支持后续训练新的动作策略；
-- 调整现有策略和奖励函数；
-- 扩展新的机器人技能；
-- 研究不同控制参数的影响；
-- 为后续仿真迁移和实机部署提供基础。
+- Support the training of new motion policies;
+- Adjust existing policies and reward functions;
+- Extend the system with additional robot skills;
+- Study the effects of different control parameters;
+- Provide a foundation for future simulation transfer and physical robot deployment.
 
-## 🏗️ 系统组成
+## 🏗️ System Components
 
-| 模块 | 主要作用 |
+| Module | Main Responsibility |
 |---|---|
-| `skills` | 高动态技能加载、执行和状态管理 |
-| `nav` | LiDAR、占据栅格、A* 规划和导航控制 |
-| `play` | Go2 行走策略、步态切换和运动控制 |
-| `common` | 三维显示、机器人网格、相机、状态栏和快捷键 |
-| `weights` | 行走、导航及高动态技能的预训练权重 |
-| `assets` | Go2 技能仿真模型和场景资源 |
-| `resources` | Go2 机器人描述、URDF 和网格资源 |
-| `legged_gym` | 四足机器人任务环境和仿真接口 |
-| `rsl_rl` | 策略网络、PPO 算法、运行器和数据存储 |
-| `vendor` | 技能组合及导航链路所需的内置脚本 |
+| `skills` | Loading, execution, and state management of highly dynamic skills |
+| `nav` | LiDAR, occupancy grid mapping, A* planning, and navigation control |
+| `play` | Go2 locomotion policy, gait switching, and motion control |
+| `common` | 3D visualization, robot meshes, camera control, status bar, and shortcuts |
+| `weights` | Pretrained weights for locomotion, navigation, and highly dynamic skills |
+| `assets` | Go2 skill simulation models and scene resources |
+| `resources` | Go2 robot descriptions, URDF files, and mesh resources |
+| `legged_gym` | Quadruped robot task environments and simulation interfaces |
+| `rsl_rl` | Policy networks, PPO algorithm, runners, and data storage |
+| `vendor` | Built-in scripts required for skill composition and navigation pipelines |
 
-## 🔄 系统运行流程
+## 🔄 System Workflow
 
-系统的基本运行流程如下：
+The basic system workflow is as follows:
 
 ```text
-加载机器人模型和仿真场景
-            ↓
-加载预训练强化学习权重
-            ↓
-初始化机器人状态与观测数据
-            ↓
-接收技能、导航或运动控制指令
-            ↓
-策略网络计算关节控制目标
-            ↓
-Genesis 执行物理仿真
-            ↓
-更新机器人姿态与传感器信息
-            ↓
-Viser 显示机器人和场景状态
+Load the Robot Model and Simulation Scene
+                  ↓
+Load Pretrained Reinforcement Learning Weights
+                  ↓
+Initialize the Robot State and Observations
+                  ↓
+Receive Skill, Navigation, or Motion Commands
+                  ↓
+Calculate Joint Targets Using the Policy Network
+                  ↓
+Execute Physics Simulation in Genesis
+                  ↓
+Update Robot Posture and Sensor Information
+                  ↓
+Visualize the Robot and Scene State with Viser
 ```
 
-技能演示、导航和运动控制模块使用统一的机器人仿真资源，但分别管理各自的控制逻辑和交互状态。
+The skill demonstration, navigation, and locomotion control modules share the same robot simulation resources but manage their own control logic and interaction states independently.
 
-## 🔧 技术特点
+## 🔧 Technical Features
 
-- 使用 Genesis 完成刚体动力学和关节控制仿真；
-- 使用 PyTorch 加载并执行强化学习策略；
-- 使用 Viser 显示机器人连杆姿态和场景信息；
-- 使用 LiDAR 和占据栅格描述导航环境；
-- 使用 A* 算法完成全局路径规划；
-- 支持 GPU 和 CPU 两种计算后端；
-- 支持技能、导航和运动控制功能切换；
-- 支持机器人状态、路径、地图和传感器数据可视化；
-- 模型、权重和机器人资源集中存放在项目目录中；
-- 各功能模块相互独立，可以分别运行和扩展；
-- 保留 Legged Gym 与 RSL-RL 的核心结构，便于后续研究和策略调整。
+- Genesis-based rigid-body dynamics and joint-control simulation;
+- PyTorch-based loading and execution of reinforcement learning policies;
+- Viser-based visualization of robot link poses and scene information;
+- LiDAR and occupancy grid representations of navigation environments;
+- A* global path planning;
+- Support for both GPU and CPU computing backends;
+- Switching between skill, navigation, and locomotion control functions;
+- Visualization of robot states, paths, maps, and sensor data;
+- Centralized storage of models, weights, and robot resources;
+- Independent and extensible functional modules;
+- Retention of the core Legged Gym and RSL-RL structures for future research and policy adjustment.
 
-## 📌 项目定位
+## 📌 Project Scope
 
-本项目主要面向以下应用场景：
+This project is primarily intended for:
 
-- 四足机器人运动控制研究；
-- 强化学习策略效果展示；
-- 高动态机器人技能验证；
-- 自主导航算法验证；
-- 机器人仿真教学；
-- 机器人运动和规划结果可视化；
-- 后续技能扩展与算法研究。
+- Quadruped robot locomotion control research;
+- Reinforcement learning policy demonstrations;
+- Validation of highly dynamic robot skills;
+- Autonomous navigation algorithm validation;
+- Robot simulation education;
+- Visualization of robot motion and planning results;
+- Future skill expansion and algorithm research.
 
-## ⚠️ 使用范围
+## ⚠️ Usage Scope
 
-当前项目主要用于机器人仿真研究、算法验证和技能效果演示，实际控制对象是 Genesis 环境中的虚拟 Unitree Go2。
-
-项目尚未直接集成 Unitree 实机 SDK、ROS 通信或真实电机控制接口。
-
-如需部署到实体机器人，还需要进一步完成：
-
-- 实机通信接口；
-- 控制频率匹配；
-- 机器人状态估计；
-- 关节限位保护；
-- 速度和力矩限制；
-- 急停与安全保护；
-- 传感器数据适配；
-- Sim-to-Real 参数调整；
-- 实机环境下的安全测试。
+This project is primarily intended for robot simulation research, algorithm validation, and skill demonstration. The controlled object is currently a virtual Unitree Go2 robot running in the Genesis simulation environment. The project has not yet directly integrated the Unitree physical robot SDK, ROS communication, or real motor control interfaces. Deployment on a physical robot would require additional work on communication interfaces, safety protection, state estimation, and Sim-to-Real adaptation.
